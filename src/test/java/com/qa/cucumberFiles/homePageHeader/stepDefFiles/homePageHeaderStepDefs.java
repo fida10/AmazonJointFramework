@@ -13,7 +13,7 @@ public class homePageHeaderStepDefs {
 		this.initDrPgsAndUtils = initDrPgsAndUtils;
 	}
 
-	@Given("User is on walmart homepage")
+	@Given("User is on amazon homepage")
 	public void userOnWalmartHomePage(){
 		initDrPgsAndUtils.getHomePageHeaderBar().validatePageIsOpen();
 	}
