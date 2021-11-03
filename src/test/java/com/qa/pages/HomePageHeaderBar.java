@@ -1,44 +1,38 @@
 package com.qa.pages;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.qa.appUtilFiles.ActionExecutor;
-import com.qa.appUtilFiles.ExceptionHandling;
 import com.qa.utilFiles.coreCodeUtilFiles.ExtentReportGenerator;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class HomePageHeaderBar extends somePageTemplate {
 
-	@FindBy(xpath = "//img[@alt = 'Walmart' and @loading = 'lazy']")
-	WebElement walmartHomePageLogo;
-	String walmartHomePageLogoXPath = "//img[@alt = 'Walmart' and @loading = 'lazy']";
+	@FindBy(xpath = "//a[@id='nav-logo-sprites']")
+	WebElement amazonHomePageLogo;
+	String amazonHomePageLogoXPath = "//a[@id='nav-logo-sprites']";
 
-	@FindBy(xpath = "//input[@type = 'search' and @aria-label = 'Search']")
+	@FindBy(xpath = "//input[@id='twotabsearchtextbox']")
 	WebElement homePageSearchBar;
-	String homePageSearchBarXPath = "//input[@type = 'search' and @aria-label = 'Search']";
+	String homePageSearchBarXPath = "//input[@id='twotabsearchtextbox']";
 
-	@FindBy(xpath = "//a[@link-identifier = 'walmartLogo']/following-sibling::div[@class = 'ml3']/button")
+	@FindBy(xpath = "//div[@id = 'nav-tools']//a[@id = 'nav-cart']")
 	WebElement homePageCart;
-	String homePageCartXPath = "//a[@link-identifier = 'walmartLogo']/following-sibling::div[@class = 'ml3']/button";
-
-	@FindBy(xpath = "//div[contains(@aria-label, 'Human Challenge requires verification')]")
-	WebElement pressAndHoldRobotButton;
-	String pressAndHoldRobotButtonXPath = "//div[contains(@aria-label, 'Human Challenge requires verification')]";
+	String homePageCartXPath = "//div[@id = 'nav-tools']//a[@id = 'nav-cart']";
 
 	public HomePageHeaderBar(WebDriver driver, ExtentTest currentTestFromInitDrPgsAndUtilsClass, ExtentReportGenerator extentReportGeneratorFromInitDrPgsAndUtilsClass, Scenario scenario) {
 		super(driver, currentTestFromInitDrPgsAndUtilsClass, extentReportGeneratorFromInitDrPgsAndUtilsClass, scenario);
 	}
 
-	public WebElement getWalmartHomePageLogo() {
-		return walmartHomePageLogo;
+	public WebElement getAmazonHomePageLogo() {
+		return amazonHomePageLogo;
 	}
 
-	public String getWalmartHomePageLogoXPath() {
-		return walmartHomePageLogoXPath;
+	public String getAmazonHomePageLogoXPath() {
+		return amazonHomePageLogoXPath;
 	}
 
 	public WebElement getHomePageSearchBar() {
@@ -59,17 +53,17 @@ public class HomePageHeaderBar extends somePageTemplate {
 
 	//validation methods begin
 	public void validatePageIsOpen(){
-		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, walmartHomePageLogoXPath, 0));
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, amazonHomePageLogoXPath, 0));
 	}
 	//validation methods end
 
 	//flows related to this page begin
 	public void searchForSomething(String whatToSearchFor){
-
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, homePageSearchBarXPath, 0));
 
 		homePageSearchBar.click();
 		homePageSearchBar.sendKeys(whatToSearchFor);
+		homePageSearchBar.sendKeys(Keys.ENTER);
 		actionExecutor.waitFiveSeconds();
 	}
 }
