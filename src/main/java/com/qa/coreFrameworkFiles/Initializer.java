@@ -117,7 +117,7 @@ Fields and methods are made static because they will not be changed once initial
 		webDriver.manage().timeouts().implicitlyWait(Long.parseLong(pro.getProperty("implicitWaitTimer")), TimeUnit.SECONDS); //implicit wait, applies globally
 
 		//launch website
-		homePageURL = "https://www.amazon.com/"; //homepage url goes here, this should be pulled from config.properties file
+		homePageURL = "https://www.amazon.com/"; //homepage url goes here, this should be pulled from config.properties file. some comment
 		webDriver.get(homePageURL);
 		webDriver.manage().window().maximize();
 	}
