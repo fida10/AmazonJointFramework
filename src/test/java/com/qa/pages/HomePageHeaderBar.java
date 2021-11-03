@@ -73,16 +73,16 @@ public class HomePageHeaderBar extends somePageTemplate {
 		actionExecutor.waitFiveSeconds();
 	}
 
-	public void hoverOverFirstThirteenHeaderCategories(){
-		Actions actions = new Actions(driver);
-
+	public void clickOnFirstThirteenHeaderCategories(){
+//		Actions actions = new Actions(driver);
 		List<WebElement> headerCategories = driver.findElements(By.xpath(commonPathToAllHeaderCategoriesXPath));
 		for(int i = 0; i < 13; i++){
-			actions
-					.moveToElement(headerCategories.get(i))
-					.build()
-					.perform();
-			actionExecutor.waitOnePointFiveSeconds();
+			headerCategories.get(i).click();
+			driver.navigate().back();
+//			actionExecutor.waitOnePointFiveSeconds();
+			Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, commonPathToAllHeaderCategoriesXPath,0));
+			headerCategories = driver.findElements(By.xpath(commonPathToAllHeaderCategoriesXPath));
+			homePageSearchBar.click();
 		}
 
 	}
