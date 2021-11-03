@@ -21,4 +21,8 @@ public class homePageHeaderStepDefs {
 	public void userSearchesOnHomePage(String whatToSearchFor){
 		initDrPgsAndUtils.getHomePageHeaderBar().searchForSomething(whatToSearchFor);
 	}
+	@When("User hovers over first 13 links in header")
+	public void userHoversOverThirteenHeaderLinks(){
+		initDrPgsAndUtils.getHomePageHeaderBar().hoverOverFirstThirteenHeaderCategories();
+	}
 }
