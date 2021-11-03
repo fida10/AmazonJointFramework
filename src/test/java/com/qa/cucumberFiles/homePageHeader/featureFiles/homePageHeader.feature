@@ -2,7 +2,7 @@ Feature: FeatureToExecute
 
     Scenario Outline: NameOfScenario_MustBeExactMatchOnExcelForAppend
         Given Execution solution is started and driver is initialized for the test case "someString"
-        Given User is on walmart homepage
+        Given User is on amazon homepage
         When User searches for something in the search bar on homepage "<whatToSearchFor>"
 
     Examples:
@@ -14,6 +14,6 @@ Feature: FeatureToExecute
 
     Scenario: NameOfScenario_MustBeExactMatchOnExcelForAppend
         Given Execution solution is started and driver is initialized for the test case "someString"
-        Given User is on walmart homepage
+        Given User is on amazon homepage
         When User searches for something in the search bar on homepage "clothes"
 
