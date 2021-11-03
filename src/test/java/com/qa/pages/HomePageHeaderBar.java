@@ -6,6 +6,7 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -22,6 +23,16 @@ public class HomePageHeaderBar extends somePageTemplate {
 	@FindBy(xpath = "//div[@id = 'nav-tools']//a[@id = 'nav-cart']")
 	WebElement homePageCart;
 	String homePageCartXPath = "//div[@id = 'nav-tools']//a[@id = 'nav-cart']";
+
+	@FindBy(xpath = "//span[@class='icp-nav-flag icp-nav-flag-us']")
+	WebElement homePageCountrySelector;
+	String homePageCountrySelectorXPath = "//span[@class='icp-nav-flag icp-nav-flag-us']";
+
+	@FindBy(xpath = "//*[@id=\"nav-flyout-icp\"]/div[2]/a[1]")
+	WebElement spanishLanguageSelector;
+	String spanishLanguageSelectorXPath = "//*[@id='nav-flyout-icp']/div[2]/a[1]";
+
+
 
 	public HomePageHeaderBar(WebDriver driver, ExtentTest currentTestFromInitDrPgsAndUtilsClass, ExtentReportGenerator extentReportGeneratorFromInitDrPgsAndUtilsClass, Scenario scenario) {
 		super(driver, currentTestFromInitDrPgsAndUtilsClass, extentReportGeneratorFromInitDrPgsAndUtilsClass, scenario);
@@ -64,6 +75,23 @@ public class HomePageHeaderBar extends somePageTemplate {
 		homePageSearchBar.click();
 		homePageSearchBar.sendKeys(whatToSearchFor);
 		homePageSearchBar.sendKeys(Keys.ENTER);
+		actionExecutor.waitFiveSeconds();
+
+
+
+
+
+
+	}
+	public void changeLanguageToSpanish(){
+		Actions a = new Actions(driver);
+
+		a
+				.moveToElement(homePageCountrySelector)
+				.moveToElement(spanishLanguageSelector)
+				.click(spanishLanguageSelector)
+				.build()
+				.perform();
 		actionExecutor.waitFiveSeconds();
 	}
 }
