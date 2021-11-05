@@ -115,7 +115,6 @@ public class HomePageHeaderBar extends somePageTemplate {
 		selectYouAddressLink.click();
 
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, chooseYouLocationHeaderXPath, 0));
-		chooseYouLocationHeader.click();
 
 		new Actions(driver)
 				.moveToElement(zipCodeEnterField)
