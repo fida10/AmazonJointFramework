@@ -41,9 +41,9 @@ public class HomePageHeaderBar extends somePageTemplate {
 	WebElement zipCodeEnterField;
 	String zipCodeEnterFieldXPath = "//input[@type = 'text' and contains(@aria-label, 'zip code')]";
 
-	@FindBy(xpath = "//input[@type = 'submit' and @id = 'nav-search-submit-button']")
+	@FindBy(xpath = "//span[@class = 'a-button-text' and contains(text(), 'Apply')]")
 	WebElement zipCodeApplyButton;
-	String zipCodeApplyButtonXPath = "//input[@type = 'submit' and @id = 'nav-search-submit-button']";
+	String zipCodeApplyButtonXPath = "//span[@class = 'a-button-text' and contains(text(), 'Apply')]";
 
 	@FindBy(xpath = "//button[@name = 'glowDoneButton']")
 	WebElement doneButtonChangeAddress;
@@ -129,11 +129,12 @@ public class HomePageHeaderBar extends somePageTemplate {
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, doneButtonChangeAddressXPath, 0));
 		doneButtonChangeAddress.click();
 
+		validatePageIsOpen();
+		driver.navigate().refresh();
+
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, selectYouAddressLinkXPath,0));
 		Assert.assertTrue(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, addressSelectedXPath,0).getText().contains(zipCodeToUseFiveDigits));
 
 		System.out.println(addressSelected.getText());
 	}
-
-
 }
