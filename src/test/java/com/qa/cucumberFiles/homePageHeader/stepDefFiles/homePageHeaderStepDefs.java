@@ -21,4 +21,13 @@ public class homePageHeaderStepDefs {
 	public void userSearchesOnHomePage(String whatToSearchFor){
 		initDrPgsAndUtils.getHomePageHeaderBar().searchForSomething(whatToSearchFor);
 	}
+	@When("User clicks on first 13 links in header")
+	public void userClicksOnFirstThirteenHeaderLinks(){
+		initDrPgsAndUtils.getHomePageHeaderBar().clickOnFirstThirteenHeaderCategories();
+	}
+
+	@When("User adds zip code {string} and verifies its appearance on the home page")
+	public void addAndVerifyZipCode(String zipCode){
+		initDrPgsAndUtils.getHomePageHeaderBar().changeAndValidateAddressViaHeader(zipCode);
+	}
 }
