@@ -29,6 +29,30 @@ public class HomePageHeaderBar extends somePageTemplate {
 
 	String commonPathToAllHeaderCategoriesXPath = "//div[@id = 'nav-xshop']/a";
 
+	@FindBy(xpath = "//a[@id = 'nav-global-location-popover-link']")
+	WebElement selectYouAddressLink;
+	String selectYouAddressLinkXPath = "//a[@id = 'nav-global-location-popover-link']";
+
+	@FindBy(xpath = "//h4[text() = 'Choose your location']")
+	WebElement chooseYouLocationHeader;
+	String chooseYouLocationHeaderXPath = "//h4[text() = 'Choose your location']";
+
+	@FindBy(xpath = "//input[@type = 'text' and contains(@aria-label, 'zip code')]")
+	WebElement zipCodeEnterField;
+	String zipCodeEnterFieldXPath = "//input[@type = 'text' and contains(@aria-label, 'zip code')]";
+
+	@FindBy(xpath = "//input[@type = 'submit' and @id = 'nav-search-submit-button']")
+	WebElement zipCodeApplyButton;
+	String zipCodeApplyButtonXPath = "//input[@type = 'submit' and @id = 'nav-search-submit-button']";
+
+	@FindBy(xpath = "//button[@name = 'glowDoneButton']")
+	WebElement doneButtonChangeAddress;
+	String doneButtonChangeAddressXPath = "//button[@name = 'glowDoneButton']";
+
+	@FindBy(xpath = "//a[@id = 'nav-global-location-popover-link']//span[contains(@class, 'nav-line-2')]")
+	WebElement addressSelected;
+	String addressSelectedXPath = "//a[@id = 'nav-global-location-popover-link']//span[contains(@class, 'nav-line-2')]";
+
 	public HomePageHeaderBar(WebDriver driver, ExtentTest currentTestFromInitDrPgsAndUtilsClass, ExtentReportGenerator extentReportGeneratorFromInitDrPgsAndUtilsClass, Scenario scenario) {
 		super(driver, currentTestFromInitDrPgsAndUtilsClass, extentReportGeneratorFromInitDrPgsAndUtilsClass, scenario);
 	}
@@ -84,7 +108,31 @@ public class HomePageHeaderBar extends somePageTemplate {
 			headerCategories = driver.findElements(By.xpath(commonPathToAllHeaderCategoriesXPath));
 			homePageSearchBar.click();
 		}
+	}
 
+	public void changeAndValidateAddressViaHeader(String zipCodeToUseFiveDigits){
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, selectYouAddressLinkXPath,0));
+		selectYouAddressLink.click();
+
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, chooseYouLocationHeaderXPath, 0));
+		chooseYouLocationHeader.click();
+
+		new Actions(driver)
+				.moveToElement(zipCodeEnterField)
+				.click(zipCodeEnterField)
+				.sendKeys(zipCodeToUseFiveDigits)
+				.moveToElement(zipCodeApplyButton)
+				.click(zipCodeApplyButton)
+				.build()
+				.perform();
+
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, doneButtonChangeAddressXPath, 0));
+		doneButtonChangeAddress.click();
+
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, selectYouAddressLinkXPath,0));
+		Assert.assertTrue(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, addressSelectedXPath,0).getText().contains(zipCodeToUseFiveDigits));
+
+		System.out.println(addressSelected.getText());
 	}
 
 
