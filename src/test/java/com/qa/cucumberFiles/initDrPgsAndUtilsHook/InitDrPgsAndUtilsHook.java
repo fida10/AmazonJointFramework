@@ -106,7 +106,9 @@ public class InitDrPgsAndUtilsHook { //unofficially also a listeners class for c
 				ifWebDriverExceptionThrown();
 			}
 		}
-		finisher.quitDriver(initializer.getWebDriver(), currentTest, extentReportGenerator);
+		if(!new GetPropertiesFromSysOrConfig().getPropertyFromSysOrConfig("browserPlatform").equalsIgnoreCase("firefox")) {
+			finisher.quitDriver(initializer.getWebDriver(), currentTest, extentReportGenerator);
+		}
 //		finisher.closeServer(initializer.getServer(), currentTest, extentReportGenerator);
 		//add code to save network logs, and if possible browser logs, here.
 		extentReportGenerator.tearDown();

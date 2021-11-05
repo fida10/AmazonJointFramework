@@ -21,11 +21,18 @@ public class homePageHeaderStepDefs {
 	public void userSearchesOnHomePage(String whatToSearchFor){
 		initDrPgsAndUtils.getHomePageHeaderBar().searchForSomething(whatToSearchFor);
 	}
+	@When ("User wants to change language to Spanish")
+	public void userChangesLanguageToSpanish() {
+		initDrPgsAndUtils.getHomePageHeaderBar().changeLanguageToSpanish();
+	}
+	@When ("User wants to search for and verify a product {string}")
+	public void userSearchesForAndVerifiesAProduct(String searchQuery) {
+		initDrPgsAndUtils.getHomePageHeaderBar().searchForAndVerifyProduct(searchQuery);
+	}
 	@When("User clicks on first 13 links in header")
 	public void userClicksOnFirstThirteenHeaderLinks(){
 		initDrPgsAndUtils.getHomePageHeaderBar().clickOnFirstThirteenHeaderCategories();
 	}
-
 	@When("User adds zip code {string} and verifies its appearance on the home page")
 	public void addAndVerifyZipCode(String zipCode){
 		initDrPgsAndUtils.getHomePageHeaderBar().changeAndValidateAddressViaHeader(zipCode);

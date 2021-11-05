@@ -27,6 +27,26 @@ public class HomePageHeaderBar extends somePageTemplate {
 	WebElement homePageCart;
 	String homePageCartXPath = "//div[@id = 'nav-tools']//a[@id = 'nav-cart']";
 
+	@FindBy(xpath = "//a[contains(@aria-label, 'Choose a language')]")
+	WebElement homePageCountrySelector;
+	String homePageCountrySelectorXPath = "//a[contains(@aria-label, 'Choose a language')]";
+
+	@FindBy(xpath = "//div[@id = 'nav-flyout-icp']//span[@class = 'nav-text' and contains(text(), 'ES')]")
+	WebElement spanishLanguageSelector;
+	String spanishLanguageSelectorXPath = "//div[@id = 'nav-flyout-icp']//span[@class = 'nav-text' and contains(text(), 'ES')]";
+
+	@FindBy(xpath = "//div[@class='nav-search-submit nav-sprite']")
+	WebElement amazonSearchButton;
+	String amazonSearchButtonXPath = "//div[@class='nav-search-submit nav-sprite']";
+
+	@FindBy(xpath = "//h2//a[contains(@class, 'a-text-normal')]")
+	WebElement firstSearchResult;
+	String firstSearchResultXPath = "//h2//a[contains(@class, 'a-text-normal')]";
+
+	@FindBy(xpath= "//span[@id='productTitle']")
+	WebElement firstSearchResultTitle;
+	String firstSearchResultTitleXPath = "//span[@id='productTitle']";
+
 	String commonPathToAllHeaderCategoriesXPath = "//div[@id = 'nav-xshop']/a";
 
 	@FindBy(xpath = "//a[@id = 'nav-global-location-popover-link']")
@@ -95,15 +115,59 @@ public class HomePageHeaderBar extends somePageTemplate {
 		homePageSearchBar.sendKeys(whatToSearchFor);
 		homePageSearchBar.sendKeys(Keys.ENTER);
 		actionExecutor.waitFiveSeconds();
+
+	}
+	public void changeLanguageToSpanish(){
+		Actions a = new Actions(driver);
+
+		a
+				.moveToElement(homePageSearchBar)
+				.click(homePageSearchBar)
+						.build()
+								.perform();
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, homePageCountrySelectorXPath, 0));
+		a
+
+				.moveToElement(amazonHomePageLogo)
+				.moveToElement(homePageCountrySelector)
+				.build()
+				.perform();
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, spanishLanguageSelectorXPath, 0));
+		spanishLanguageSelector.click();
+		actionExecutor.waitFiveSeconds();
+	}
+	public void searchForAndVerifyProduct(String searchQuery){
+		Actions b = new Actions(driver);
+
+		b
+				.moveToElement(homePageSearchBar)
+				.click(homePageSearchBar)
+				.sendKeys(searchQuery)
+				.sendKeys(Keys.ENTER)
+				.build()
+				.perform();
+
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, firstSearchResultXPath, 0));
+
+		firstSearchResult.click();
+
+
+		String returnedSearchTerm = firstSearchResultTitle.getText();
+		System.out.println(returnedSearchTerm);
+
+		if(returnedSearchTerm.toLowerCase().contains(searchQuery.toLowerCase())){
+			System.out.println("Test passed");
+		} else {
+			System.out.println("You messed up");
+		}
+
 	}
 
 	public void clickOnFirstThirteenHeaderCategories(){
-//		Actions actions = new Actions(driver);
 		List<WebElement> headerCategories = driver.findElements(By.xpath(commonPathToAllHeaderCategoriesXPath));
 		for(int i = 0; i < 13; i++){
 			headerCategories.get(i).click();
 			driver.navigate().back();
-//			actionExecutor.waitOnePointFiveSeconds();
 			Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, commonPathToAllHeaderCategoriesXPath,0));
 			headerCategories = driver.findElements(By.xpath(commonPathToAllHeaderCategoriesXPath));
 			homePageSearchBar.click();

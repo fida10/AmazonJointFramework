@@ -1,5 +1,10 @@
 Feature: FeatureToExecute
 
+    Scenario: userChangesLanguageToSpanish
+        Given Execution solution is started and driver is initialized for the test case "someString"
+        When User wants to change language to Spanish
+
+
     Scenario: UserClicksOnThirteenHeaderLinks
         Given Execution solution is started and driver is initialized for the test case "SomeString"
         When User clicks on first 13 links in header
@@ -15,6 +20,19 @@ Feature: FeatureToExecute
         |11432               |
         |89119               |
         |14214               |
+
+    Scenario Outline: userSearchesForProduct
+        Given Execution solution is started and driver is initialized for the test case "someString"
+        When User wants to search for and verify a product "<searchedProduct>"
+
+    Examples:
+        |searchedProduct|
+        |bleach         |
+        |washing machine|
+        |cookie       |
+        |bicycle          |
+
+
 
     Scenario Outline: NameOfScenario_MustBeExactMatchOnExcelForAppend
         Given Execution solution is started and driver is initialized for the test case "someString"
