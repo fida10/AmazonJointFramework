@@ -24,5 +24,11 @@ public class homePageHeaderStepDefs {
 	@When ("User wants to change language to Spanish")
 	public void userChangesLanguageToSpanish() {
 		initDrPgsAndUtils.getHomePageHeaderBar().changeLanguageToSpanish();
-		}
+	}
+	@When ("User wants to search for and verify a product {string}")
+	public void userSearchesForAndVerifiesAProduct(String searchQuery) {
+		initDrPgsAndUtils.getHomePageHeaderBar().searchForAndVerifyProduct(searchQuery);
+	}
+
+
 }

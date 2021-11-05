@@ -1,8 +1,24 @@
 Feature: FeatureToExecute
 
-    Scenario: userChangesLanguageToSpanish
+#    Scenario: userChangesLanguageToSpanish
+#        Given Execution solution is started and driver is initialized for the test case "someString"
+#        When User wants to change language to Spanish
+
+    Scenario Outline: userSearchesForBleach
         Given Execution solution is started and driver is initialized for the test case "someString"
-        When User wants to change language to Spanish
+        When User wants to search for and verify a product "<searchedProduct>"
+
+    Examples:
+        |searchedProduct|
+        |bleach         |
+        |washing machine|
+        |cookie       |
+        |bicycle          |
+
+
+
+
+
 
 
 

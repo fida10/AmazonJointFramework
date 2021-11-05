@@ -10,6 +10,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class HomePageHeaderBar extends somePageTemplate {
 
 	@FindBy(xpath = "//a[@id='nav-logo-sprites']")
@@ -24,13 +26,27 @@ public class HomePageHeaderBar extends somePageTemplate {
 	WebElement homePageCart;
 	String homePageCartXPath = "//div[@id = 'nav-tools']//a[@id = 'nav-cart']";
 
-	@FindBy(xpath = "//span[@class='icp-nav-flag icp-nav-flag-us']")
+	@FindBy(xpath = "//a[contains(@aria-label, 'Choose a language')]")
 	WebElement homePageCountrySelector;
-	String homePageCountrySelectorXPath = "//span[@class='icp-nav-flag icp-nav-flag-us']";
+	String homePageCountrySelectorXPath = "//a[contains(@aria-label, 'Choose a language')]";
 
-	@FindBy(xpath = "//*[@id=\"nav-flyout-icp\"]/div[2]/a[1]")
+	@FindBy(xpath = "//div[@id = 'nav-flyout-icp']//span[@class = 'nav-text' and contains(text(), 'ES')]")
 	WebElement spanishLanguageSelector;
-	String spanishLanguageSelectorXPath = "//*[@id='nav-flyout-icp']/div[2]/a[1]";
+	String spanishLanguageSelectorXPath = "//div[@id = 'nav-flyout-icp']//span[@class = 'nav-text' and contains(text(), 'ES')]";
+
+	@FindBy(xpath = "//div[@class='nav-search-submit nav-sprite']")
+	WebElement amazonSearchButton;
+	String amazonSearchButtonXPath = "//div[@class='nav-search-submit nav-sprite']";
+
+//	@FindBy(xpath = "//span[@class='a-size-base-plus a-color-base a-text-normal' and contains(text(), '764442854668')]")
+	@FindBy(xpath = "//h2//a[contains(@class, 'a-text-normal')]")
+	WebElement firstSearchResult;
+	String firstSearchResultXPath = "//h2//a[contains(@class, 'a-text-normal')]";
+	
+	@FindBy(xpath= "//span[@id='productTitle']")
+	WebElement firstSearchResultTitle;
+	String firstSearchResultTitleXPath = "//span[@id='productTitle']";
+
 
 
 
@@ -84,14 +100,57 @@ public class HomePageHeaderBar extends somePageTemplate {
 
 	}
 	public void changeLanguageToSpanish(){
+		//driver.navigate().refresh();
 		Actions a = new Actions(driver);
 
 		a
+				.moveToElement(homePageSearchBar)
+				.click(homePageSearchBar)
+						.build()
+								.perform();
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, homePageCountrySelectorXPath, 0));
+		a
+
+				.moveToElement(amazonHomePageLogo)
 				.moveToElement(homePageCountrySelector)
-				.moveToElement(spanishLanguageSelector)
-				.click(spanishLanguageSelector)
 				.build()
 				.perform();
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, spanishLanguageSelectorXPath, 0));
+		spanishLanguageSelector.click();
 		actionExecutor.waitFiveSeconds();
 	}
+	public void searchForAndVerifyProduct(String searchQuery){
+		Actions b = new Actions(driver);
+
+		b
+				.moveToElement(homePageSearchBar)
+				.click(homePageSearchBar)
+				.sendKeys(searchQuery)
+				.sendKeys(Keys.ENTER)
+				.build()
+				.perform();
+
+		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, firstSearchResultXPath, 0));
+
+		firstSearchResult.click();
+
+
+		String returnedSearchTerm = firstSearchResultTitle.getText();
+		System.out.println(returnedSearchTerm);
+
+		if(returnedSearchTerm.toLowerCase().contains(searchQuery.toLowerCase())){
+			System.out.println("Test passed");
+		} else {
+			System.out.println("You messed up");
+		}
+
+
+
+
+	}
+
+
+
+
+
 }
