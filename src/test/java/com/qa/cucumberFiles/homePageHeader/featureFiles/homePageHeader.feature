@@ -21,7 +21,7 @@ Feature: FeatureToExecute
         |89119               |
         |14214               |
 
-    Scenario Outline: userSearchesForProduct
+    Scenario Outline: userSearchesForAndVerifiesProductOnSearchBar
         Given Execution solution is started and driver is initialized for the test case "someString"
         When User wants to search for and verify a product "<searchedProduct>"
 
