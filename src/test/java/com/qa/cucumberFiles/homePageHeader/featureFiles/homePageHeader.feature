@@ -9,7 +9,7 @@ Feature: FeatureToExecute
         Given Execution solution is started and driver is initialized for the test case "SomeString"
         When User clicks on first 13 links in header
 
-    Scenario Outline: NameOfScenario_MustBeExactMatchOnExcelForAppend
+    Scenario Outline: userChangesAndVerifiesZipCodeOnAmazonHomePage
         Given Execution solution is started and driver is initialized for the test case "someString"
         Given User is on amazon homepage
         When User adds zip code "<zipCode>" and verifies its appearance on the home page
@@ -34,7 +34,7 @@ Feature: FeatureToExecute
 
 
 
-    Scenario Outline: NameOfScenario_MustBeExactMatchOnExcelForAppend
+    Scenario Outline: userSearchesForSomethingInTheSearchBar
         Given Execution solution is started and driver is initialized for the test case "someString"
         Given User is on amazon homepage
         When User searches for something in the search bar on homepage "<whatToSearchFor>"
@@ -46,7 +46,7 @@ Feature: FeatureToExecute
         |oil               |
         |donuts               |
 
-    Scenario: NameOfScenario_MustBeExactMatchOnExcelForAppend
+    Scenario: userSearchesForClothesOnAmazonSearchBar
         Given Execution solution is started and driver is initialized for the test case "someString"
         Given User is on amazon homepage
         When User searches for something in the search bar on homepage "clothes"
