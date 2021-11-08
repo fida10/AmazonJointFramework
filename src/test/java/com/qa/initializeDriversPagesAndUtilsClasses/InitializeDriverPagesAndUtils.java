@@ -13,6 +13,7 @@ public class InitializeDriverPagesAndUtils {
     private WebDriver webDriver;
 
     private HomePageHeaderBar homePageHeaderBar;
+    private AmazonSignInPage amazonSignInPage;
 
     private ExcelReader excelReader;
     //ActionExecutor and ExceptionHandling utilities objects are created and used within classes themselves
@@ -40,6 +41,7 @@ public class InitializeDriverPagesAndUtils {
 
         //pages
         homePageHeaderBar = new HomePageHeaderBar(webDriver, currentTest, extentReportGenerator, scenario);
+        amazonSignInPage = new AmazonSignInPage(webDriver,currentTest,extentReportGenerator,scenario);
     }
     //getDrivers
     public WebDriver getWebDriver(){
@@ -49,6 +51,10 @@ public class InitializeDriverPagesAndUtils {
     public HomePageHeaderBar getHomePageHeaderBar() {
         return homePageHeaderBar;
     }
+    public AmazonSignInPage getAmazonSignInPage() {
+        return amazonSignInPage;
+    }
+
 
     //getUtilities
     public ExcelReader getExcelReader() {

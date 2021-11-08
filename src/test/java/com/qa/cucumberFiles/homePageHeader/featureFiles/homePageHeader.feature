@@ -1,6 +1,25 @@
 Feature: FeatureToExecute
 
-    Scenario: userChangesLanguageToSpanish
+    Scenario: userGoesToTheSignInPage
+        Given Execution solution is started and driver is initialized for the test case "someString"
+        Given User is on amazon homepage
+        When User wants to navigate to the sign in page
+
+  Scenario Outline: userGoesToTheSignInPageAndUsesBogusEmailToLogIn
+    Given Execution solution is started and driver is initialized for the test case "someString"
+    Given User wants to navigate to the sign in page
+    When User uses a bogus email "<bogusEmail>" to sign into amazon
+
+    Examples:
+      |bogusEmail|
+      |cats@meow.com|
+      |isjdiasjdihjd@yahoo.com|
+      |empty@life.com         |
+      |suparmanbinspiderman@optonline.net|
+
+
+
+  Scenario: userChangesLanguageToSpanish
         Given Execution solution is started and driver is initialized for the test case "someString"
         When User wants to change language to Spanish
 
