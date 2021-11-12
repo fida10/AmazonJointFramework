@@ -33,7 +33,6 @@ Feature: FeatureToExecute
         |Bicycle|
 
 
-
     Scenario Outline: userSearchesForSomethingInTheSearchBar
         Given Execution solution is started and driver is initialized for the test case "someString"
         Given User is on amazon homepage

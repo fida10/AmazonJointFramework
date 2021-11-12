@@ -50,7 +50,7 @@ public class SearchResults extends somePageTemplate {
 	//validation methods end
 
 	//flows related to this page begin
-	public void verifySearchedProduct(String searchQueryFirstLetterCapital){
+	public void verifySearchedProduct(String searchQueryFirstLetterCapital){ //assumes that webdriver is already on search page
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, searchPageHeaderXPath, 0));
 
 		String xpathToFirstResultMatch = String.format(firstSearchResultDynamicXPath, searchQueryFirstLetterCapital);
@@ -58,13 +58,13 @@ public class SearchResults extends somePageTemplate {
 
 		driver.findElement(By.xpath(xpathToFirstResultMatch)).click();
 
-		String returnedSearchTerm = firstSearchResultTitle.getText();
+		String returnedSearchTerm = firstSearchResultTitle.getText(); //will eventually be moved to the product page object class, when it is created
 		System.out.println(returnedSearchTerm);
 
-		if(returnedSearchTerm.toLowerCase().contains(searchQueryFirstLetterCapital)){
+		if(returnedSearchTerm.contains(searchQueryFirstLetterCapital)){
 			System.out.println("Test passed");
 		} else {
-			System.out.println("You messed up"); //replace with assert.fail
+			Assert.fail("You messed up");
 		}
 	}
 }

@@ -101,10 +101,6 @@ public class HomePageHeaderBar extends somePageTemplate {
 		return homePageCartXPath;
 	}
 
-	public String getFirstSearchResultTitleXPath() {
-		return firstSearchResultTitleXPath;
-	}
-
 	public String getCommonPathToAllHeaderCategoriesXPath() {
 		return commonPathToAllHeaderCategoriesXPath;
 	}
