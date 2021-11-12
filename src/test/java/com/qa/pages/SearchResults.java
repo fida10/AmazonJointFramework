@@ -4,10 +4,13 @@ import com.aventstack.extentreports.ExtentTest;
 import com.qa.utilFiles.coreCodeUtilFiles.ExtentReportGenerator;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class SearchResults extends somePageTemplate {
 
@@ -56,7 +59,16 @@ public class SearchResults extends somePageTemplate {
 		String xpathToFirstResultMatch = String.format(firstSearchResultDynamicXPath, searchQueryFirstLetterCapital);
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, xpathToFirstResultMatch, 0));
 
-		driver.findElement(By.xpath(xpathToFirstResultMatch)).click();
+
+		List<WebElement> listOfMatchingSearchResults = driver.findElements(By.xpath(xpathToFirstResultMatch));
+
+		for(WebElement indivWebElement : listOfMatchingSearchResults){
+			try{
+				indivWebElement.click();
+			} catch (ElementNotInteractableException e){
+				System.out.println("ElementNotInteractableException thrown, most likely due to a plugin hiding the link. Attempting to click the next link.");
+			}
+		}
 
 		String returnedSearchTerm = firstSearchResultTitle.getText(); //will eventually be moved to the product page object class, when it is created
 		System.out.println(returnedSearchTerm);
