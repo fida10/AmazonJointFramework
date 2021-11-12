@@ -7,6 +7,8 @@
     <test verbose="2" thread-count="2" name="mgoNativeRegression"> <!--overrides whatever is written in surefire.-->
         <classes>
             <!--Cucumber test runner classes go here-->
+            <class name="com.qa.cucumberFiles.homePageHeader.testRunnerFiles.homePageHeaderTestRunner"/>
+            <class name="com.qa.cucumberFiles.signIn.testRunnerFiles.SignInTestRunner"/>
         </classes>
     </test>
  </suite>
