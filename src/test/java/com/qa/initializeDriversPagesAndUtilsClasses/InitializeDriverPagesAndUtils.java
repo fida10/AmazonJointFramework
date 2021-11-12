@@ -13,6 +13,8 @@ public class InitializeDriverPagesAndUtils {
     private WebDriver webDriver;
 
     private HomePageHeaderBar homePageHeaderBar;
+    private Cart cart;
+    private SearchResults searchResults;
     private AmazonSignInPage amazonSignInPage;
 
     private ExcelReader excelReader;
@@ -41,6 +43,8 @@ public class InitializeDriverPagesAndUtils {
 
         //pages
         homePageHeaderBar = new HomePageHeaderBar(webDriver, currentTest, extentReportGenerator, scenario);
+        cart = new Cart(webDriver, currentTest, extentReportGenerator, scenario);
+        searchResults = new SearchResults(webDriver, currentTest, extentReportGenerator, scenario);
         amazonSignInPage = new AmazonSignInPage(webDriver,currentTest,extentReportGenerator,scenario);
     }
     //getDrivers
@@ -50,6 +54,12 @@ public class InitializeDriverPagesAndUtils {
     //getPages
     public HomePageHeaderBar getHomePageHeaderBar() {
         return homePageHeaderBar;
+    }
+    public Cart getCart(){
+        return cart;
+    }
+    public SearchResults getSearchResults() {
+        return searchResults;
     }
     public AmazonSignInPage getAmazonSignInPage() {
         return amazonSignInPage;

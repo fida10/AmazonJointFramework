@@ -23,15 +23,14 @@ Feature: FeatureToExecute
 
     Scenario Outline: userSearchesForAndVerifiesProductOnSearchBar
         Given Execution solution is started and driver is initialized for the test case "someString"
-        When User wants to search for and verify a product "<searchedProduct>"
+        When User wants to search for and verify a product "<searchedProductFirstLetterUpperCase>"
 
     Examples:
-        |searchedProduct|
-        |bleach         |
-        |washing machine|
-        |cookie       |
-        |bicycle          |
-
+        |searchedProductFirstLetterUpperCase|
+        |Bleach|
+        |Washing|
+        |Cookie|
+        |Bicycle|
 
 
     Scenario Outline: userSearchesForSomethingInTheSearchBar
