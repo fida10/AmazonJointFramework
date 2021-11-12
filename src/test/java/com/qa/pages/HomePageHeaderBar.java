@@ -39,14 +39,6 @@ public class HomePageHeaderBar extends somePageTemplate {
 	WebElement amazonSearchButton;
 	String amazonSearchButtonXPath = "//div[@class='nav-search-submit nav-sprite']";
 
-	@FindBy(xpath = "//h2//a[contains(@class, 'a-text-normal')]")
-	WebElement firstSearchResult;
-	String firstSearchResultXPath = "//h2//a[contains(@class, 'a-text-normal')]";
-
-	@FindBy(xpath= "//span[@id='productTitle']")
-	WebElement firstSearchResultTitle;
-	String firstSearchResultTitleXPath = "//span[@id='productTitle']";
-
 	String commonPathToAllHeaderCategoriesXPath = "//div[@id = 'nav-xshop']/a";
 
 	@FindBy(xpath = "//a[@id = 'nav-global-location-popover-link']")
@@ -111,11 +103,15 @@ public class HomePageHeaderBar extends somePageTemplate {
 	public void searchForSomething(String whatToSearchFor){
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, homePageSearchBarXPath, 0));
 
-		homePageSearchBar.click();
-		homePageSearchBar.sendKeys(whatToSearchFor);
-		homePageSearchBar.sendKeys(Keys.ENTER);
-		actionExecutor.waitFiveSeconds();
+		Actions b = new Actions(driver);
 
+		b
+				.moveToElement(homePageSearchBar)
+				.click(homePageSearchBar)
+				.sendKeys(whatToSearchFor)
+				.sendKeys(Keys.ENTER)
+				.build()
+				.perform();
 	}
 	public void changeLanguageToSpanish(){
 		Actions a = new Actions(driver);
@@ -135,32 +131,6 @@ public class HomePageHeaderBar extends somePageTemplate {
 		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, spanishLanguageSelectorXPath, 0));
 		spanishLanguageSelector.click();
 		actionExecutor.waitFiveSeconds();
-	}
-	public void searchForAndVerifyProduct(String searchQuery){
-		Actions b = new Actions(driver);
-
-		b
-				.moveToElement(homePageSearchBar)
-				.click(homePageSearchBar)
-				.sendKeys(searchQuery)
-				.sendKeys(Keys.ENTER)
-				.build()
-				.perform();
-
-		Assert.assertNotNull(exceptionHandling.combinedStaleAndIsElementDisplayedHandling(driver, firstSearchResultXPath, 0));
-
-		firstSearchResult.click();
-
-
-		String returnedSearchTerm = firstSearchResultTitle.getText();
-		System.out.println(returnedSearchTerm);
-
-		if(returnedSearchTerm.toLowerCase().contains(searchQuery.toLowerCase())){
-			System.out.println("Test passed");
-		} else {
-			System.out.println("You messed up");
-		}
-
 	}
 
 	public void clickOnFirstThirteenHeaderCategories(){

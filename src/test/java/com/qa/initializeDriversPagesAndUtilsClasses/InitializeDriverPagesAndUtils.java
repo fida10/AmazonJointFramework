@@ -13,6 +13,8 @@ public class InitializeDriverPagesAndUtils {
     private WebDriver webDriver;
 
     private HomePageHeaderBar homePageHeaderBar;
+    private Cart cart;
+    private SearchResults searchResults;
 
     private ExcelReader excelReader;
     //ActionExecutor and ExceptionHandling utilities objects are created and used within classes themselves
@@ -40,6 +42,8 @@ public class InitializeDriverPagesAndUtils {
 
         //pages
         homePageHeaderBar = new HomePageHeaderBar(webDriver, currentTest, extentReportGenerator, scenario);
+        cart = new Cart(webDriver, currentTest, extentReportGenerator, scenario);
+        searchResults = new SearchResults(webDriver, currentTest, extentReportGenerator, scenario);
     }
     //getDrivers
     public WebDriver getWebDriver(){
@@ -48,6 +52,12 @@ public class InitializeDriverPagesAndUtils {
     //getPages
     public HomePageHeaderBar getHomePageHeaderBar() {
         return homePageHeaderBar;
+    }
+    public Cart getCart(){
+        return cart;
+    }
+    public SearchResults getSearchResults() {
+        return searchResults;
     }
 
     //getUtilities
