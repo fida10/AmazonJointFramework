@@ -65,6 +65,14 @@ public class HomePageHeaderBar extends somePageTemplate {
 	WebElement addressSelected;
 	String addressSelectedXPath = "//a[@id = 'nav-global-location-popover-link']//span[contains(@class, 'nav-line-2')]";
 
+	@FindBy(xpath = "//span[@class='nav-line-2 ']")
+	WebElement signInHoverMenu;
+	String signInHoverMenuXPath = "//span[@class='nav-line-2 ']";
+
+	@FindBy(xpath = "//div[@id='nav-al-container']//span[text() = 'Sign in']")
+	WebElement signInButton;
+	String signInButtonXPath = "//div[@id='nav-al-container']//span[text() = 'Sign in']";
+
 	public HomePageHeaderBar(WebDriver driver, ExtentTest currentTestFromInitDrPgsAndUtilsClass, ExtentReportGenerator extentReportGeneratorFromInitDrPgsAndUtilsClass, Scenario scenario) {
 		super(driver, currentTestFromInitDrPgsAndUtilsClass, extentReportGeneratorFromInitDrPgsAndUtilsClass, scenario);
 	}
@@ -92,6 +100,79 @@ public class HomePageHeaderBar extends somePageTemplate {
 	public String getHomePageCartXPath() {
 		return homePageCartXPath;
 	}
+
+	public String getFirstSearchResultTitleXPath() {
+		return firstSearchResultTitleXPath;
+	}
+
+	public String getCommonPathToAllHeaderCategoriesXPath() {
+		return commonPathToAllHeaderCategoriesXPath;
+	}
+
+	public WebElement getSelectYouAddressLink() {
+		return selectYouAddressLink;
+	}
+
+	public String getSelectYouAddressLinkXPath() {
+		return selectYouAddressLinkXPath;
+	}
+
+	public WebElement getChooseYouLocationHeader() {
+		return chooseYouLocationHeader;
+	}
+
+	public String getChooseYouLocationHeaderXPath() {
+		return chooseYouLocationHeaderXPath;
+	}
+
+	public WebElement getZipCodeEnterField() {
+		return zipCodeEnterField;
+	}
+
+	public String getZipCodeEnterFieldXPath() {
+		return zipCodeEnterFieldXPath;
+	}
+
+	public WebElement getZipCodeApplyButton() {
+		return zipCodeApplyButton;
+	}
+
+	public String getZipCodeApplyButtonXPath() {
+		return zipCodeApplyButtonXPath;
+	}
+
+	public WebElement getDoneButtonChangeAddress() {
+		return doneButtonChangeAddress;
+	}
+
+	public String getDoneButtonChangeAddressXPath() {
+		return doneButtonChangeAddressXPath;
+	}
+
+	public WebElement getAddressSelected() {
+		return addressSelected;
+	}
+
+	public String getAddressSelectedXPath() {
+		return addressSelectedXPath;
+	}
+
+	public WebElement getSignInHoverMenu() {
+		return signInHoverMenu;
+	}
+
+	public String getSignInHoverMenuXPath() {
+		return signInHoverMenuXPath;
+	}
+
+	public WebElement getSignInButton() {
+		return signInButton;
+	}
+
+	public String getSignInButtonXPath() {
+		return signInButtonXPath;
+	}
+
 
 	//validation methods begin
 	public void validatePageIsOpen(){
